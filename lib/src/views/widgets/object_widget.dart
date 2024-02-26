@@ -1033,7 +1033,7 @@ class _ObjectControlBox extends StatelessWidget {
     this.active = false,
     this.inactiveColor = Colors.white,
     this.activeColor,
-    this.shadowColor = const Color.fromARGB(0, 0, 0, 0),
+    this.shadowColor =  Colors.transparent,
   }) : super(key: key);
 
  @override
