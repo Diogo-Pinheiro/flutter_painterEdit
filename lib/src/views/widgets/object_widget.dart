@@ -514,28 +514,6 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
               ),
             );
           }),
-          // if(selectedDrawableIndex != null)
-          //   ...[
-          //     Positioned(
-          //
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             border:  Border.all(
-          //               color: Colors.white,
-          //               width: 2,
-          //             ),
-          //             boxShadow: [
-          //               BorderBoxShadow(
-          //                 color: Colors.black,
-          //                 blurRadius: 1,
-          //               )
-          //             ]
-          //         ),
-          //         width: size.width,
-          //         height: size.height,
-          //       ),
-          //     )
-          //   ]
         ],
       );
     });
@@ -1055,18 +1033,22 @@ class _ObjectControlBox extends StatelessWidget {
     this.active = false,
     this.inactiveColor = Colors.white,
     this.activeColor,
-    this.shadowColor = Colors.black,
+    this.shadowColor = const Color.fromARGB(0, 0, 0, 0),
   }) : super(key: key);
 
-  @override
+ @override
   Widget build(BuildContext context) {
     ThemeData? theme = Theme.of(context);
     if (theme == ThemeData.fallback()) theme = null;
     final activeColor = this.activeColor ?? theme?.colorScheme.secondary ?? Colors.blue;
+
+    // Defina a opacidade com base no estado ativo ou inativo
+    final opacity = active ? 1.0 : 0.0; // Definindo como 0.0 para 100% transparente
+
     return AnimatedContainer(
       duration: _ObjectWidgetState.controlsTransitionDuration,
       decoration: BoxDecoration(
-        color: active ? activeColor : inactiveColor,
+        color: activeColor.withOpacity(opacity),
         shape: shape,
         boxShadow: [
           BoxShadow(
